@@ -1,0 +1,15 @@
+.full-image {
+    display: block;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+}
+
+#hover-slide {
+    position: absolute;
+    /*margin-left: 30%;*/
+    top: 70vh;
+    z-index: 10;
+}
+
+.more {display: none;}
