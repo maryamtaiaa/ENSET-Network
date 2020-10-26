@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+<title>Publier un nouveau article</title>
+  <link href="<%=request.getContextPath()%>/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="<%=request.getContextPath()%>/resources/css/sb-admin-2.min.css" rel="stylesheet">
+ <link href="/user/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+ <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+         
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+             <li style="margin-left : 0;"><img src="/img/logo2.jpg" style="  width: 220px; height: 60px;margin-top : 8px;" ></li>
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+          
+
+           
+
+            <!-- Nav Item - User Information -->
+           
+
+          </ul>
+
+        </nav>
+<div class="container-fluid" >
+		<div  class="col-md-6 col-md-offset-3" style="margin-left : auto; margin-right: auto;">
+			<div class="shadow-lg p-3 mb-5 bg-white rounded" >
+			<center>	<div class="panel-heading" style="font-style: italic; font-family : Times New Roman;font-size : 30px;color:#1B2F7D; ">Nouveau Article</div></center><br><br> 
+				<div class="panel-body">
+
+					<form th:action="@{/user/articles/save}" method="post">
+						<div class="form-group">
+							<label class="control-label">Titre : </label> <input
+								class="form-control" type="text" name="title" th:value="${article.title}">
+						<span class="text-danger" th:errors="${article.title}"></span>
+						</div>
+						<div class="form-group">
+						
+							<label class="control-label">Text : </label> 
+							
+							<textarea  class="form-control"  name="description"  th:value="${article.description}" >
+							</textarea>
+					<!-- 		<input class="form-control" type="text" name="description"  th:value="${article.description}" >
+								
+						<span class="text-danger" th:errors="${article.description}"></span> -->
+						
+						</div>
+					
+						
+						
+						
+						<div class="form-group">
+							<button class="btn btn-success" type="submit">Publier</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

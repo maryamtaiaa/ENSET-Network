@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MyNetwork</title>
+
+<!-- Custom fonts for this template-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<link href="img">
+<!-- jQuery library -->
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Custom styles for this template-->
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+  #result {
+   position: absolute;
+   width: 50%;
+   max-width:870px;
+   cursor: point	er;
+   overflow-y: auto;
+   max-height: 400px;
+   box-sizing: border-box;
+   z-index: 1001;
+  }
+  .link-class:hover{
+   background-color:#f1f1f1;
+  }
+  </style>
+</head>
+
+<body id="page-top">
+
+	<nav
+		class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+		<nav
+			class="navbar navbar-icon-top navbar-expand-lg navbar-dark color fixed-top shadow">
+			<div class="container">
+				<a class="navbar-brand" href="/navbarexemple"><img alt="Brand"
+					src="/img/logo2f.png"></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<div class="form-group has-search">
+						<span class="fa fa-search form-control-feedback"></span> <input
+				id="txtSearch"	type="text" class="form-control" placeholder="Rechercher" name="keyword">
+				 <ul class="list-group" id="result"></ul>
+					</div>
+					<ul class="navbar-nav mr-auto">
+
+
+					</ul>
+					<ul class="navbar-nav ">
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/user/home}"> <i class="fa fa-home"></i> Accueil
+						</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/user/mynetwork}">
+								<i class="fa fa-users"></i> Réseau
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/user/articles}"> <i class="fa fa-bars"></i>
+								Articles
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="http://localhost:8080" target="_blank"> <i class="fa fa-book"></i> Cours
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Message">
+								<i class="fa fa-envelope"></i> Message
+						</a></li>
+
+
+
+
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <img class="rounded-circle"
+								alt="Brand" th:src="@{${'/img/' + user.profil.photo}}"
+								width="80" height="60">
+						</a> <!-- Dropdown - User Information -->
+							<div style="font-size: 20px;"
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in "
+								aria-labelledby="userDropdown">
+
+								<a class="dropdown-item"
+									th:text="${user.nom}+' '+${user.prenom}"></a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+									<a class="dropdown-item"
+									th:href="@{/user/profile(id=${user.idUtl})}"><i
+									></i>Voir le profil</a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+								<a class="dropdown-item"
+									th:href="@{/user/editProfil(id=${user.profil.idProfil})}"><i
+									></i> Gérer le profil</a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+              
+
+								<a class="dropdown-item " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Se déconnecter</a>
+							</div></li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+
+
+
+	</nav>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-white  sidebar accordion shadow-lg col-md-2 col-xs-6"
+			id="accordionSidebar" style="margin-left: 50px; margin-top: 20px;">
+
+
+
+
+			<!-- Divider -->
+			<div class="p-3 mb-3 bg-white rounded">
+				<div class="card"
+					style="margin-left: 5px; border: 1px solid #31577C; background-color: #EFF3F7;">
+
+					<img th:src="@{${'/img/' + user.profil.photo}}"
+						style="margin-left: auto; margin-top: 5px; margin-right: auto; width: 50%; border-radius: 50%; height: 80px;" />
+
+					<div class="card-body">
+						<h7 class="card-title" th:text="${user.nom}+' '+${user.prenom}" style="margin-left:8px;"></h7>
+
+						<center>
+						<a th:href="@{/user/profile(id=${user.idUtl})}"
+											class="btn btn-outline-info stretched-link"
+											style="margin-top: 8px;">Voir le profil</a>
+						
+							<!--  <button type="button" class="btn btn-outline-info"
+								style="margin-top: 8px;" th:href="@{/user/profile(id=${user.idUtl})}">Voir le profil</button> -->
+						</center>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Nav Item - Dashboard -->
+			<li id="item" class="nav-item" th:each="f:${filieres}"><a
+				class="nav-link" th:href="@{/user/promo(nom=${f.nom})}"> <i
+					class="fa fa-group" style="color: #31577C;"></i> <span
+					th:text="Profiles+' '+${f.nom}"
+					style="color: #31577C; margin-left: 10px; font-size: 15px;"></span>
+			</a>
+				<hr class="sidebar-divider my-0" style=""></li>
+
+
+
+
+
+		</ul>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column"
+			style="margin-left: 80px;">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-sm-13 row">
+
+							<!--  //hhhh -->
+							<h2 class="flex-2 t-17" style="padding-left: 30px;" >Personnes de ENSET Mohammedia que vous pourriez connaître</h2>
+														<div style="padding: 30px; display: block;"
+								th:each="u:${utilisateurs}" class="row">
+
+								<div class="card shadow" style="width: 18rem;">
+
+									<img th:src="@{${'/img/' + u.profil.photo}}"
+										class="img-profile rounded-circle	" alt="..." width="180px"
+										height="180px"
+										style="border: 5px solid #c0c0c0; border-radius: 50%; shape-outside: circle(); margin-left: 55px; margin-top: 18px;">
+
+									<div class="card-body">
+										<h5 class="card-title"
+											style="color: black; font-weight: bold; padding-left: 40px;">
+											&nbsp;<label th:text="${u.nom}"></label>&nbsp;<label
+												th:text="${u.prenom}"></label>
+										</h5>
+										<p class="card-text" style="padding-left: 32px;">
+											<label th:text="${u.compte.gmail}"></label>
+										</p>
+										<a th:href="@{/user/profile(id=${u.idUtl})}"
+											class="btn btn-primary stretched-link"
+											style="margin-left: 40px; width: 180px;">Voir le profil</a>
+											<a th:href="@{/user/chat(id=${u.idUtl})}"
+											class="btn btn-primary stretched-link"
+											style="margin-left: 40px; width: 180px;">Message</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- /.row -->
+
+
+
+
+						<!-- /.container-fluid -->
+					</div>
+				</div>
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<footer class="footer-distributed">
+
+		<div class="footer-left">
+
+			<img alt="Brand" src="/img/logo2f.png" width="200" height="150">
+
+			<p class="footer-links">
+				<a href="/navbarexemple" class="link-1">Accueil</a> <a
+					href="/Reseau">Réseau</a> <a href="#">Messages</a>
+			</p>
+		</div>
+		<div class="footer-center">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p>BP 159 Bd Hassan II Mohammedia</p>
+			</div>
+
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>05 23 32 22 20</p>
+			</div>
+
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p>ensetnetwork@gmail.com</p>
+			</div>
+
+		</div>
+
+		<div class="footer-right">
+			<h3>
+				ENSET<span>NETWORK</span>
+			</h3>
+			<p class="footer-company-about">Est un réseau social et
+				professionnel dédié aux étudiants et aux lauréats de l'ENSETM</p>
+
+			<div class="footer-icons">
+
+				<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+					class="fa fa-twitter"></i></a> <a href="#"><i
+					class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
+
+			</div>
+
+		</div>
+		<p class="footer-company-name">GLSID © 2020</p>
+	</footer>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">Ã</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+<script th:inline="javascript">
+	 /*<![CDATA[*/
+    
+    var utilisateurs =  /*[[${utilisateur}]]*/
+
+  /*]]>*/
+   window.onload = function(){
+            var txtSearch = document.getElementById('txtSearch');
+            document.onclick = function(e){
+               if(e.target.id !== 'txtSearch'){
+            	   document.getElementById('result').innerHTML = "";
+            	   document.getElementById('txtSearch').value = "";
+               }
+            };
+         };
+
+	$('#txtSearch').on('keyup',function(){
+		var value = $(this).val();
+		console.log('value = '+ value);
+	
+		
+		//get filtered utilisateur list
+		var data  = filterFunction(value, utilisateurs);
+		rebuildUl(data);
+	});
+	
+	function filterFunction(value, data)
+	{
+		var filteredData = [];
+		for(var i = 0 ; i<data.length;i++)
+			{
+			value = value.toLowerCase();
+			var fname = data[i].nom.toLowerCase();
+			var lname = data[i].prenom.toLowerCase();
+			console.log('fname = '+ fname);
+			console.log('photo = '+ data[i].photo);
+			if(fname.includes(value) || lname.includes(value) )
+				{
+				filteredData.push(data[i]);
+				
+				}
+			}
+		return filteredData;
+	}
+	function rebuildUl(data)
+	{
+		var ul = document.getElementById('result');
+		ul.innerHTML = '';
+		for(var i = 0 ; i<data.length;i++)
+			{
+		var li =	"<a  id=\"demo\" href=\"/user/profile?id="+data[i].idUt+"\"><li class=\"list-group-item link-class\" > <img   src=\"/img/"+data[i].photo+"\"  height=\"70\"    width=\"70\"  class=\"rounded\" />       " + data[i].nom + "  | <span > "+ data[i].prenom + "</span> <span class=\"text-muted\" > | filière  "+ data[i].filiere + "</span><span class=\"text-muted\" > | promo  "+ data[i].promo + "</span></li></a>";
+		ul.innerHTML += li;
+		
+			}
+		
+		
+	}
+	
+	
+	
+	</script>
+
+</body>
+
+</html>

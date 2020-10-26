@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	
+	>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>ENSET-NETWORK</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+  <!-- Custom fonts for this template-->
+  <link href="/fontawesome-free/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="wrapper"   >
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+   
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/admin/home}">
+        
+        <div ><img src="/img/logo2.jpg" style="  width: 220px; height: 75px;margin-top : 8px;" ></div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/home}">
+          <i class="fa fa-home"></i>
+          <span  >Home</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/admin/admins}">
+          <i class="fa fa-user-circle"></i>
+          <span  >Espace Administrateurs</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/users}">
+          <i class="fa fa-group"></i>
+          <span  >Espace Utilisateurs</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/cours}">
+          <i class="fa fa-book"></i>
+          <span  >Espace Cours</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/departements}">
+          <i class="fa fa-building-o"></i>
+          <span  >Espace Départements</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/filieres}">
+          <i class="fa fa-graduation-cap"></i>
+          <span  >Espace Filieres</span></a>
+      </li>
+  	<li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/upload}">
+          <i class="fa fa-group"></i>
+          <span  >Espace Etudiants</span></a>
+      </li>
+
+    </ul>
+    <div class="container-fluid">
+     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+         
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+      
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+           
+     
+          <li class="nav-item dropdown no-arrow"> 
+          <a class="dropdown-item " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Se déconnecter</a>
+						</a> <!-- Dropdown - User Information -->
+							</li>
+          
+
+           
+
+            <!-- Nav Item - User Information -->
+           
+
+          </ul>
+
+        </nav>
+			<div class="card">
+				
+				<div class="card-body">
+					<form th:action="@{/admin/admins}" method="get">
+					<div class="form-group">
+						<label>Mot clé :</label> 
+						<input type="text" name="motCle" th:value="${mc}" />
+						<button type="submit" class="btn  btn-success">Chercher</button>
+						<!-- <a  th:href="@{/admin/admins/AdminsForm}">
+						<button class="btn btn-primary" style="float: right;" >Ajouter Admin</button>
+					</a> -->
+					<a th:href="@{/admin/admins/AdminsForm}" style="float: right;">Ajouter Admin</a>
+					
+
+					</div>
+					</form>
+
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>UserName</th>
+							
+							
+							<th>Action 1</th>
+							<th>Action 2</th>
+						</tr>
+						<tr th:each="user:${listeAdmins}">
+							<td th:text="${user.idAdmin}"></td>
+							<td th:text="${user.nom}"></td>
+							<td th:text="${user.prenom}"></td>
+							<td th:text="${user.login.username}"></td>
+							
+							
+							<td><a
+								onclick="return confirm('etes vous sur de vouloir supprimer')"
+								th:href="@{/admin/admins/delete(id=${user.idAdmin},page=${currentPage},motCle=${motCle})}">Delete</a>
+
+							</td>
+							<td><a
+								th:href="@{/admin/admins/edit(id=${user.idAdmin})}">Modifier</a>
+
+							</td>
+						</tr>
+
+					</table>
+					<ul class="nav nav-pills">
+						<li th:class="${currentPage==status.index}?'active':''"
+							th:each="page,status:${pages}"><a class=""
+							th:href="@{/admin/admins(page=${status.index},motCle=${motCle})}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</body>
+</html>

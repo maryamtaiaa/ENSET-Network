@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Custom fonts for this template-->
+<link href="/fontawesome-free/all.min.css" rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+	input {
+		border-radius: 25px;
+		width: 75%;
+		opacity: 0.6;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	div {
+		border-radius: 25px;
+		padding: 5px;
+		text-align: center;
+	}
+
+	.container {
+		margin-top: 80px;
+		background-color: white;
+		border-style: solid;
+		border-color: #3c8ce8;
+		border-radius: 25px;
+		border-width: 60px;
+
+	}
+
+	img {
+		max-height: 300px;
+		max-width: 300px;
+		width: 300px;
+		height: 302px;
+	}
+</style>
+</head>
+
+<body
+	style="background-image: url('img/0.jpg'); background-repeat: no-repeat; background-position: center top; background-size: 100% auto;">
+
+	<div class="container">
+		<div class="col-md-4">
+			<div class="card">
+				<img class="centre" src="/img/logo.jpg" alt="image" /><br />
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card">
+				<div style="font-family:arial, sans-serif; font-size:xx-large; color:#45454a;">Activation</div>
+				<div class="card-body">
+
+					<form th:action="@{/activate}" th:object="${details}" method="post">
+						<div class="form-group">
+							<label for="exampleInputEmail1">CIN</label> <input type="text" class="form-control"
+								id="input-cin" th:field="*{cin}" name="cin" placeholder="Enter CIN">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">CNE</label> <input th:field="*{cne}" class="form-control"
+								id="input-cne" name="cne" placeholder="Enter CNE">
+						</div>
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

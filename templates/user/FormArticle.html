@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title>Espace Article</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/model.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+      <li><a th:href="@{/admin/home}">Home</a></li>
+      <li><a th:href="@{/admin/users}">Users</a></li>
+      <li><a th:href="@{/admin/admins}">Admins</a></li>
+      <li><a th:href="@{/admin/cours}">Cours</a></li>    
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+    <li>
+    <a  th:href="@{/logout}">Logout</a>
+    </li>
+    </ul>
+  </div>
+</nav>
+<section layout:fragment="layout1"></section>
+
+
+<div class="container" >
+<div class="panel">
+		<div class="panel-body">
+    <a href="#" class="panel-link" data-toggle="modal" data-target="#myModal">ici</a>
+  </div>
+</div>
+
+
+ <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog modal-backdrop-show ">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header modal-header-primary">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Ajouter Votre Article</h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form th:action="@{/article/save}" method="post">
+						<div class="for-group pmd-textfield pmd-textfield-floating-label">
+							<label class="control-label">Titre : </label> <input
+								class="form-control" type="text" name="title" th:value="${article.title}">
+						<span class="text-danger" th:errors="${article.title}"></span>
+						</div>
+						<div class="for-group">
+							<label class="control-label">Description : </label>
+							<!--  <input
+								class="form-control" type="textarea" name="description" th:value="${article.description}" > --> 
+								<textarea class="form-control" name="description" th:value="${article.description}" ></textarea>
+								
+						<span class="text-danger" th:errors="${article.description}"></span>
+						
+						</div>
+						<br><br>
+					
+					 <!-- Modal footer -->
+        <div class="modal-footer">
+          <div class="for-group">
+							<button class="btn btn-info" type="submit">publier</button>
+
+		</div>
+        </div>	
+					</form>
+					
+        </div>
+        
+       
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+
+</footer>
+</body>
+</html>

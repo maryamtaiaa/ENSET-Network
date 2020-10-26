@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title>Admins</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav">
+      <li><a th:href="@{/admin/home}">Home</a></li>
+      <li><a th:href="@{/admin/users}">Users</a></li>
+      <li><a th:href="@{/admin/admins}">Admins</a></li>
+      <li><a th:href="@{/admin/cours}">Cours</a></li>
+      <li><a th:href="@{/admin/filieres}">Filieres</a></li>
+      <li><a th:href="@{/admin/departements}">Deparements</a></li>
+     
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+    <li>
+    <a  th:href="@{/logout}">Logout</a>
+    </li>
+    </ul>
+  </div>
+</nav>
+
+<section layout:fragment="content1"></section>
+<footer>
+
+</footer>
+</body>
+</html>

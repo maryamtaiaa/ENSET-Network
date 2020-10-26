@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr"  xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">	
+  
+
+  <title>Promo</title>
+
+  <!-- Custom fonts for this template-->
+
+   <link rel="stylesheet"  type="text/css" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+   <link href="/css/styleProfile.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+<link href="img">	
+<!-- jQuery library -->
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Custom styles for this template-->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+  #result {
+   position: absolute;
+   width: 50%;
+   max-width:870px;
+   cursor: point	er;
+   overflow-y: auto;
+   max-height: 400px;
+   box-sizing: border-box;
+   z-index: 1001;
+  }
+  .link-class:hover{
+   background-color:#f1f1f1;
+  }
+  </style>
+</head>
+
+<body id="page-top">
+ 
+   	<nav
+		class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+		<nav
+			class="navbar navbar-icon-top navbar-expand-lg navbar-dark color fixed-top shadow">
+			<div class="container">
+				<a class="navbar-brand" href="/navbarexemple"><img alt="Brand"
+					src="/img/logo2f.png"></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<div class="form-group has-search">
+						<span class="fa fa-search form-control-feedback"></span> <input
+				id="txtSearch"	type="text" class="form-control" placeholder="Rechercher" name="keyword">
+				 <ul class="list-group" id="result"></ul>
+					</div>
+					<ul class="navbar-nav mr-auto">
+
+
+					</ul>
+					<ul class="navbar-nav ">
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/user/home}"> <i class="fa fa-home"></i> Accueil
+						</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/user/mynetwork}">
+								<i class="fa fa-users"></i> Réseau
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/user/articles}"> <i class="fa fa-bars"></i> Articles
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="http://localhost:8080" target="_blank"> <i class="fa fa-book"></i> Cours
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Message">
+								<i class="fa fa-envelope"></i> Message
+						</a></li>
+
+
+
+
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <img class="rounded-circle"
+								alt="Brand" th:src="@{${'/img/' + user.profil.photo}}"
+								width="80" height="60">
+						</a> <!-- Dropdown - User Information -->
+							<div style="font-size: 20px;"
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in "
+								aria-labelledby="userDropdown">
+
+								<a class="dropdown-item"
+									th:text="${user.nom}+' '+${user.prenom}"></a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+									<a class="dropdown-item"
+									th:href="@{/user/profile(id=${user.idUtl})}"><i
+									></i>Voir le profil</a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+								<a class="dropdown-item"
+									th:href="@{/user/editProfil(id=${user.profil.idProfil})}"><i
+									></i> Gérer le profil</a>
+								<div class="dropdown-divider" style="font-size: 20px;"></div>
+              
+
+								<a class="dropdown-item " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Se déconnecter</a>
+							</div></li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+
+
+	</nav>
+        </nav>
+        
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+<ul
+			class="navbar-nav bg-white  sidebar accordion shadow-lg col-md-2 col-xs-6"
+			id="accordionSidebar" style="margin-left: 50px; margin-top: 20px;">
+
+
+
+
+			<!-- Divider -->
+			<div class="p-3 mb-3 bg-white rounded">
+				<div class="card"
+					style="margin-left: 5px; border: 1px solid #31577C; background-color: #EFF3F7;">
+
+					<img th:src="@{${'/img/' + user.profil.photo}}"
+						style="margin-left: auto; margin-top: 5px; margin-right: auto; width: 50%; border-radius: 50%; height: 80px;" />
+
+					<div class="card-body">
+						<h7 class="card-title" th:text="${user.nom}+' '+${user.prenom}" style="margin-left:8px;"></h7>
+
+						<a th:href="@{/user/profile(id=${user.idUtl})}"
+											class="btn btn-outline-info stretched-link"
+													style="margin-top: 8px;margin-left:-8px">Voir le profil</a>
+						
+					
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Nav Item - Dashboard -->
+			<li id="item" class="nav-item" th:each="f:${filieres}"><a
+				class="nav-link" th:href="@{/user/promo(nom=${f.nom})}"> <i
+					class="fa fa-group" style="color: #31577C;"></i> <span
+					th:text="Profiles+' '+${f.nom}"
+					style="color: #31577C; margin-left: 10px; font-size: 15px;"></span>
+			</a>
+				<hr class="sidebar-divider my-0" style=""></li>
+
+
+
+
+
+		</ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" style="margin-left: 80px;">
+
+      <!-- Main Content -->
+      <div>
+
+        <!-- Topbar -->
+        
+        <!-- End of Topbar -->
+      
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+ 
+       <div class="col-lg-10" style="padding: 20px;">
+         <div class="headerProfil">
+        <h1 style="color: black;" class="animated flash">Informations personnelles</h1>
+        <div class="infoHeader animated bounce">Informations de base utilisées sur les services ENSET NETWORK (nom, photo, etc.)</div>
+        </div>
+        <div class="shadow   col-lg-12 infoProfil" >
+                <div class=" py-3">
+                  <h6 class="m-0   titre">Profil</h6>
+                    <div class=" bounce " style="padding: 8px; font-size: 18px;">Certaines de ces informations peuvent être vues par les autres utilisateurs des services ENSET NETWORK.</div>
+                </div>
+                  <form style="padding-left: 8px;font-size: 18px;" th:action="@{/user/saveProfil(id=${profil.idProfil})}" method="post">
+                           
+                           <div class="form-group" >
+                                   
+                                 <input class="form-control"   type="hidden" name="idProfil" th:value="${profil.idProfil}">
+
+                                  </div>
+                           
+                           <div class="form-inline "  >
+                                       <div class="form-group mb-3">
+                                           <label  class=" col-form-label">Photo</label>
+     
+                                      </div>
+                                      <div class="form-group  mb-3" style="padding-left: 115px;">
+                                             <label>Personnalisez  votre compte en ajoutant une photo</label>
+    
+                                      </div>
+                                      <div class="form-group mx-sm-5 mb-3" style="padding-left: 20px;">
+                                            <input  class="img-profile rounded-circle" type="image"  th:src="@{${'/img/'  + profil.photo}}"  width="70" height="70">
+                                            <input name="photo" type="text" hidden="true" th:value="${profil.photo}" > 
+                                          
+                                            <input type="file" name="imageFile" id="staticImg" style="width: 5px;height: 5px;">
+                                        
+                                      </div>
+  <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
+   
+                               </div>
+                                   <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                   <div class="form-group row">
+                                       
+                                           <label for="staticTelephone" class="col-sm-2 col-form-label">téléphone</label>
+                                           <div class="col-sm-6">
+                                                   <input type="text"  class="form-control-plaintext" id="staticTelephone" name="telephone" th:value="${profil.telephone}" style="padding-left: 10px;">
+                                          </div>
+                                      </div>
+                                      
+                                 
+                                    
+                                       <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row" style="height: 130px;">
+                                                   <label for="inputDescription" class="col-sm-2 col-form-label"> Description </label>
+                                      <div class="col-sm-8" style="height: 100px;">
+                                                   <textarea class="form-control" rows="5" id="inputDescription" name="description" th:text="${profil.description}" style="border:1px dotted #ffffff;"></textarea>
+                                     </div>
+                                     </div>
+                                     <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                     <div style="width:20px; position: relative;text-align: right;margin-left: 550px;">
+                                     <button type="submit" class="btn btn-primary mb-3">Enregistrer</button>
+                                    </div>
+                                    </form>
+            <!--   //form-groupe 2 -->
+             	
+
+
+  
+
+
+  
+
+                </div>
+                 
+                 
+          <!--        // div2  -->
+             <div class="shadow   col-lg-12 infoProfil" >
+                <div class=" py-4	">
+                  <h6 class="m-0   titre">Coordonnées</h6>
+                   
+                </div>
+                  <form style="padding-left: 20px;font-size: 18px;"  th:action="@{/user/saveCordonnee(id=${profil.idProfil})}" method="post">
+                          
+                                  <div class="form-group" >
+                                   
+                                                    <input class="form-control"  hidden="true"  name="idUtl" th:value="${utilisateur.idUtl}">
+                                                    <input class="form-control" hidden="true"    name="compte.idCompte" th:value="${utilisateur.compte.idCompte}">
+                                                    <input class="form-control"  hidden="true"   name="filiere.idFiliere" th:value="${utilisateur.filiere.idFiliere}">
+                                                    <input class="form-control"  hidden="true"   name="login.idLogin" th:value="${utilisateur.login.idLogin}">
+                                                    <input class="form-control" hidden="true"    name="profil.idProfil" th:value="${utilisateur.profil.idProfil}">
+                                                      
+                                                    <input class="form-control" hidden="true"    name="compte.CIN" th:value="${utilisateur.compte.CIN}">
+                                                    <input class="form-control" hidden="true"    name="compte.CNE" th:value="${utilisateur.compte.CNE}">
+                                                    <input class="form-control" hidden="true"    name="compte.status" th:value="${utilisateur.compte.status}">  
+                                                 
+                                                      
+                                  </div>
+                                     <div class="form-group row">
+                                           <label for="nomUtilisateur" class="col-sm-2 col-form-label">Nom</label>
+                                           <div class="col-sm-6" style="padding-left: 105px;">
+                                                   <input type="text"  class="form-control-plaintext" id="nomUtilisateur" name="nom" th:value="${utilisateur.nom}" style="padding-left: 30px;">
+                                          </div>
+                                      </div>
+                                          <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row">
+                                           <label for="prenomUtilisateur" class="col-sm-2 col-form-label">Prenom</label>
+                                           <div class="col-sm-6" style="padding-left: 128px;">
+                                                   <input type="text"  class="form-control-plaintext" id="prenomUtilisateur" name="prenom" th:value="${utilisateur.prenom}" style="padding-left: 10px;">
+                                          </div>
+                                      </div>
+                                 
+                                    
+                                      <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row">
+                                                   <img src="/img/adrs.png" viewBox="0 0 24 24" data-supported-dps="24x24"  width="40" height="40" >
+                                                   <label for="adresseInput" class="col-sm-2 col-form-label"> Adresse </label>
+                                      <div class="col-sm-6" style="padding-left: 90px;">
+                                                    <input type="text" class="form-control-plaintext" id="adresseInput" name="adresse"  th:value="${utilisateur.adresse}" style="padding-left: 10px;">
+                                     </div>
+                                     </div>
+                                     <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row">
+                                                     <img src="/img/gmail.png" viewBox="0 0 24 24" data-supported-dps="24x24"  width="40" height="40" >
+                                                   <label for="gmailPassword" class="col-sm-2 col-form-label"> gmail  </label>
+                                      <div class="col-sm-6" style="padding-left: 90px;">
+                                                    <input type="text" class="form-control-plaintext" id="gmailPassword" name="compte.gmail" th:value="${utilisateur.compte.gmail}" style="padding-left: 10px;">
+                                     </div>
+                                     </div>
+                                       <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row" >
+                                                  <img src="/img/anivers_img.jpg" viewBox="0 0 24 24" data-supported-dps="24x24"  width="40" height="40" >
+                                                   <label for="date_naiss" class="col-sm-3 col-form-label">Date de naissance </label>
+                                        <div class="col-sm-6" style="padding-left: 10px;">
+                                                    <input type="date" class="form-control-plaintext" id="date_naiss" name="compte.dateNaissance"  th:value="${utilisateur.compte.dateNaissance}" style="padding-left: 10px;">
+                                     </div>
+                                     </div>
+                                     <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                     <div style="width:20px; position: relative;text-align: right;margin-left: 550px;">
+                                     <button type="submit" class="btn btn-primary mb-3">Enregistrer</button>
+                                    </div>
+                                    </form>
+            <!--   //form-groupe 2 -->
+             	
+                                   
+
+  
+
+
+  
+
+                </div>
+                <div class="shadow   col-lg-12 infoProfil" >
+                <div class=" py-4	">
+                  <h6 class="m-0   titre">Information de département </h6>
+                   
+                </div>
+                  <div style="padding-left: 20px;font-size: 18px;" >
+                          
+                                
+                                     <div class="form-group row">
+                                           <label for="DepUtilisateur" class="col-sm-2 col-form-label">departement</label>
+                                           <div class="col-sm-6" style="padding-left: 70px;">
+                                                   <input type="text" disabled="disabled"   class="form-control-plaintext" id="DepUtilisateur" name="filiere.departement.intitule" th:value="${utilisateur.filiere.departement.intitule}" style="padding-left: 30px;">
+                                          </div>
+                                      </div>
+                                          <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                      <div class="form-group row">
+                                           <label for="flrUtilisateur" class="col-sm-2 col-form-label">filiere</label>
+                                           <div class="col-sm-6" style="padding-left: 90px;">
+                                                   <input type="text" disabled="disabled"  class="form-control-plaintext" id="flrUtilisateur" name="filiere.nom" th:value="${utilisateur.filiere.nom}" style="padding-left: 10px;">
+                                          </div>
+                                      </div>
+                                 
+                                    
+                                      <hr style="border-bottom: 1px dotted #8c8b8b;"><br>
+                                       <label for="adresseInput" disabled="disabled" > Promo </label>
+                                     <br>
+                                      <div class="form-group row">
+                                                 
+                                                   <label for="dateEntree" class="col-sm-2 col-form-label"> Date d'entrée : </label>
+                                      <div class="col-sm-6" style="padding-left: 90px;">
+                                                    <input type="text" disabled="disabled" class="form-control-plaintext" id="dateEntree" name="promo.dat_ent"  th:value="${utilisateur.promo.dat_ent}" style="padding-left: 10px;">
+                                     </div>
+                                     </div>
+                                     
+                                      <div class="form-group row">
+                                                   
+                                                   <label for="dat_srt" class="col-sm-2 col-form-label"> Date de Sortie :  </label>
+                                      <div class="col-sm-6" style="padding-left: 90px;margin-bottom: 40px;">
+                                                    <input type="text" disabled="disabled" class="form-control-plaintext" id="dat_srt" name="promo.dat_srt" th:value="${utilisateur.promo.dat_srt}" style="padding-left: 10px;">
+                                     </div>
+                                     </div>
+                                       
+                                     
+                                     
+                                     
+                                    </div>
+            <!--   //form-groupe 2 -->
+             	
+                                   
+
+  
+
+
+  
+
+                </div>
+              
+              
+              <!-- //div3 -->
+              
+               <div class="shadow   col-lg-12 infoProfil" >
+                <div class=" py-4	">
+                  <h6 class="m-0   titre">Les réseaux sociaux</h6>
+                   
+                </div>
+                  <form style="padding-left: 20px;font-size: 18px;" th:action="@{/user/saveRs(id=${profil.idProfil})}" method="post">
+                        
+                                        
+                                 
+                                      <div class="form-group row"  th:each="r:${rs_sociaux}">
+                                      <input class="form-control" hidden="true"    name="IdRS" th:value="${r.IdRS}">
+                                      <input class="form-control" hidden="true"    name="profil.idProfil" th:value="${r.profil.idProfil}">
+                                                 <input class="form-control" hidden="true"    name="nom" th:value="${r.nom}">  
+                                                  <input class="form-control" hidden="true"    name="photo" th:value="${r.photo}">  
+                                            <img   th:src="@{${'/img/' + r.photo}}" viewBox="0 0 24 24" data-supported-dps="24x24"  width="40" height="40" >
+                                           
+                                           <label for="inputRS" class="col-sm-2 col-form-label"  th:text="${r.nom}"></label>
+                                           <div class="col-sm-8">
+                                                   <input type="text"  class="form-control-plaintext" id="inputRS" name="lien" th:value="${r.lien}" style="padding-left: 10px;">
+                                                 <hr style="border-bottom: 1px dotted #8c8b8b;">
+                                          </div>
+                                    
+                                      </div>
+                                      
+                                      
+                                 
+                                       
+                                    
+                                     <div style="width:20px; position: relative;text-align: right;margin-left: 550px;">
+                                     <button type="submit" class="btn btn-primary mb-3">Enregistrer</button>
+                                    </div>
+                                    </form>
+            <!--   //form-groupe 2 -->
+             	
+                                   
+
+  
+
+
+  
+
+                </div>
+
+    
+        <!-- /.row -->
+      
+        
+        <!-- /.row -->
+
+   
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+     
+      <!-- End of Footer -->
+
+    </div>
+    
+    <!-- End of Content Wrapper -->
+
+  </div>
+    </div>
+    <footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<img alt="Brand" src="/img/logo2f.png" width="200" height="150">
+
+				<p class="footer-links">
+					<a href="/navbarexemple" class="link-1">Accueil</a>
+					
+					<a href="/Reseau">Réseau</a>
+				
+					<a href="#">Messages</a>
+				</p>				
+			</div>
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p> BP 159 Bd Hassan II Mohammedia</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>05 23 32 22 20 </p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p>ensetnetwork@gmail.com</p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+					<h3> ENSET<span>NETWORK</span></h3>
+					 <p class="footer-company-about">
+					Est un réseau social et professionnel dédié aux étudiants et aux lauréats de l'ENSETM 
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-github"></i></a>
+
+				</div>
+
+			</div>
+<p class="footer-company-name">GLSID © 2020</p>
+		</footer>
+  
+   
+  
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">Ã</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+<script th:inline="javascript">
+	 /*<![CDATA[*/
+    
+    var utilisateurs =  /*[[${utilisateurs}]]*/
+
+  /*]]>*/
+   window.onload = function(){
+            var txtSearch = document.getElementById('txtSearch');
+            document.onclick = function(e){
+               if(e.target.id !== 'txtSearch'){
+            	   document.getElementById('result').innerHTML = "";
+            	   document.getElementById('txtSearch').value = "";
+               }
+            };
+         };
+
+	$('#txtSearch').on('keyup',function(){
+		var value = $(this).val();
+		console.log('value = '+ value);
+	
+		
+		//get filtered utilisateur list
+		var data  = filterFunction(value, utilisateurs);
+		rebuildUl(data);
+	});
+	
+	function filterFunction(value, data)
+	{
+		var filteredData = [];
+		for(var i = 0 ; i<data.length;i++)
+			{
+			value = value.toLowerCase();
+			var fname = data[i].nom.toLowerCase();
+			var lname = data[i].prenom.toLowerCase();
+			console.log('fname = '+ fname);
+			console.log('photo = '+ data[i].photo);
+			if(fname.includes(value) || lname.includes(value) )
+				{
+				filteredData.push(data[i]);
+				
+				}
+			}
+		return filteredData;
+	}
+	function rebuildUl(data)
+	{
+		var ul = document.getElementById('result');
+		ul.innerHTML = '';
+		for(var i = 0 ; i<data.length;i++)
+			{
+		var li =	"<a  id=\"demo\" href=\"/user/profile?id="+data[i].idUt+"\"><li class=\"list-group-item link-class\" > <img   src=\"/img/"+data[i].photo+"\"  height=\"70\"    width=\"70\"  class=\"rounded\" />       " + data[i].nom + "  | <span > "+ data[i].prenom + "</span> <span class=\"text-muted\" > | filière  "+ data[i].filiere + "</span><span class=\"text-muted\" > | promo  "+ data[i].promo + "</span></li></a>";
+		ul.innerHTML += li;
+		
+			}
+		
+		
+	}
+	
+	
+	
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+
+
+
+
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="/js/postrequest.js"></script>
+	<script src="/js/getrequest.js"></script>
+<title>Ajouter Cours</title>
+</head>
+<body>
+
+	<div layout:fragment="layout1">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">Nouveau Cours</div>
+				<div class="panel-body">
+
+					<form th:action="@{/admin/cours/save}" method="post" enctype="multipart/form-data" id="fileUploadForm">
+						<div class="for-group">
+							<label class="control-label">Titre : </label> <input
+								class="form-control" type="text" name="title" th:value="${cours.title}">
+						<span class="text-danger" th:errors="${cours.title}"></span>
+						</div>
+						
+						<div class="for-group">
+							<label class="control-label">Auteur : </label> <input
+								class="form-control" type="text" name="auteur" th:value="${cours.auteur}">
+						<span class="text-danger" th:errors="${cours.auteur}"></span>
+						</div>
+						
+						
+						<div class="form-group">
+						<div>				
+							<label class="control-label">Type : </label>		
+						</div>
+						
+							<div  th:object="${type}">
+								<select class="form-control" id="idTypeCour" name="type">
+									<option value="">----------</option>
+									<option th:each="type : ${typecours}"
+										th:value="${type.idTypeCour}"
+										th:text="${type.designation}"></option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label" for="uploadfile">Cour:</label>
+						<input type="file" class="form-control" id="uploadfile" placeholder="Upload File"  name="uploadfile" ></input>
+					</div>
+						
+						<div class="for-group">
+							<button class="btn btn-success" type="submit">Ajouter</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+<!-- <div  class="for-group">
+							<label class="control-label">Cours : </label>
+                            <input type="file" name="fileUpload" size="50" />
+						</div> -->
